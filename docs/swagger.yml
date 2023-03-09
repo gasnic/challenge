@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: Meli Challenge
+  version: 0.0.1
+servers:
+  - url: https://meliurl.azurewebsites.net/api/
+tags:
+  - name: url
+paths:
+  /url:
+    post:
+      tags:
+        - url
+      summary: Crea una url corta para la url indicada
+      requestBody:
+        description: Crea una nueva url
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Url'
+        required: true
+      responses:
+        '200':
+          description: Se creó la url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url'
+        '400':
+          description: Error en el request
+  /url/{shortUrl}:
+    get:
+      tags:
+        - url
+      summary: Retorna la url original dada una url corta
+      parameters:
+        - name: shortUrl
+          in: path
+          description: Url corta
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Se encontró la url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url'
+        '400':
+          description: La url no es válida
+        '404':
+          description: No se encontró la url indicada
+    delete:
+      tags:
+        - url
+      summary: Borra una url dada una url corta
+      parameters:
+        - name: shortUrl
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: La url fue borrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Url'
+        '400':
+          description: La url corta es inválida
+  /{shortUrl}:
+    get:
+      tags:
+        - url
+      summary: Redirige a la url original dada una url corta
+      parameters:
+        - name: shortUrl
+          in: path
+          description: Url corta
+          required: true
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Se encontró la url y se redirige a la misma
+        '400':
+          description: La url no es válida
+        '404':
+          description: No se encontró la url indicada
+
+components:
+  schemas:
+    Url:
+      required:
+        - Url
+      type: object
+      properties:
+        Url:
+          type: string
+          example: https://google.com/

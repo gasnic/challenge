@@ -1,0 +1,24 @@
+{
+  "version": "2.0",
+  "logging": {
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    }
+  },
+  "extensions": {
+    "durableTask": {
+      "storageProvider": {
+        "type": "AzureStorage"
+      }
+    }
+  },
+  "database": {
+    "UserName": "cosmocassandra",
+    "Password": "hhsgZwGH9ge3p5FkDRfvsf7CTnAQ3EGIMne7xSLWRrPjExEi8BuzD55FJBEZNS4dnNxlGvy1MDiLACDbQgF2RA==",
+    "CassandraContactPoint": "cosmocassandra.cassandra.cosmos.azure.com",
+    "CassandraPort": 10350
+  }
+}
